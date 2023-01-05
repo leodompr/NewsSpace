@@ -3,6 +3,7 @@ package com.uruklabs.newsspace.presentation.ui.home
 import androidx.lifecycle.*
 import com.uruklabs.newsspace.core.RemoteException
 import com.uruklabs.newsspace.core.State
+import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
 import com.uruklabs.newsspace.data.model.Post
 import com.uruklabs.newsspace.domain.GetLatestPostsUsecase
 import kotlinx.coroutines.delay
@@ -51,7 +52,7 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUsecase) : 
      */
     private fun fetchPosts() {
         viewModelScope.launch {
-            getLatestPostsUsecase()
+            getLatestPostsUsecase(SpaceFlightNewsCategory.ARTICLES.value)
                 .onStart {
                     //Faça algo no comecço do flow
                     _listPost.postValue(State.Loading)
