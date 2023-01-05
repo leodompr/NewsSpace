@@ -21,10 +21,10 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices) : PostRepo
      * mockado. No uso real é preciso usar um bloco try-catch para
      * lidar com exceções no acesso à API.
      */
-    override suspend fun listPosts(): Flow<List<Post>> = flow {
+    override suspend fun listPosts(category: String): Flow<List<Post>> = flow {
 
         try {
-            val postList = service.listPosts()
+            val postList = service.listPosts(category)
             emit(postList)
         } catch (e: HttpException) {
             throw RemoteException("Unable to conncet to SpaceFlight News Api")
