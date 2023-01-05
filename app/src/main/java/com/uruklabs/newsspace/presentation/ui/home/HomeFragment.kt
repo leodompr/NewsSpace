@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.uruklabs.newsspace.R
 import com.uruklabs.newsspace.core.State
+import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
 import com.uruklabs.newsspace.databinding.HomeFragmentBinding
 import com.uruklabs.newsspace.presentation.adapter.PostListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,7 +32,27 @@ class HomeFragment : Fragment() {
         initBinding()
         initSnackbar()
         initRecyclerView()
+        initMainMenu()
+
         return binding.root
+    }
+
+    private fun initMainMenu() {
+        with(binding.homeToolbar) {
+            this.inflateMenu(R.menu.main_menu)
+            menu.findItem(R.id.action_get_articles).setOnMenuItemClickListener {
+                viewModel.fethLatest(SpaceFlightNewsCategory.ARTICLES)
+                true
+            }
+            menu.findItem(R.id.action_get_blogs).setOnMenuItemClickListener {
+                viewModel.fethLatest(SpaceFlightNewsCategory.BLOGS)
+                true
+            }
+            menu.findItem(R.id.action_get_reports).setOnMenuItemClickListener {
+                viewModel.fethLatest(SpaceFlightNewsCategory.REPORTS)
+                true
+            }
+        }
     }
 
     private fun initSnackbar() {

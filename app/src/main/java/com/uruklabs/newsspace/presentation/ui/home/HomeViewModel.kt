@@ -46,13 +46,18 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUsecase) : 
         fetchPosts()
     }
 
+    fun fethLatest(category: SpaceFlightNewsCategory) {
+        fetchPosts(category)
+    }
+
+
     /**
      * Esse método coleta o fluxo do repositorio e atribui
      * o seu valor ao campo _listPost
      */
-    private fun fetchPosts() {
+    private fun fetchPosts(query : String) {
         viewModelScope.launch {
-            getLatestPostsUsecase(SpaceFlightNewsCategory.ARTICLES.value)
+            getLatestPostsUsecase(query)
                 .onStart {
                     //Faça algo no comecço do flow
                     _listPost.postValue(State.Loading)
