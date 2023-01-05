@@ -21,6 +21,16 @@
             android:layout_height="match_parent"
             android:background="@color/medium_gray">
 
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/home_toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/gradient_rectangle"
+                app:title="@string/HomeToolbarTitle" />
+
             <TextView
                 android:id="@+id/home_hello_text"
                 android:layout_width="wrap_content"
@@ -44,11 +54,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
                 tools:listitem="@layout/item_post" />
 
             <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="@{viewModel.progressBarVisible ? View.VISIBLE : View.GONE}"
