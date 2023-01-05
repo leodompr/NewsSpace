@@ -5,8 +5,9 @@ import com.uruklabs.newsspace.data.model.Post
 import com.uruklabs.newsspace.data.repository.PostRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetLatestPostsUsecase(private val repository: PostRepository) : UseCase.NoParam<List<Post>>() {
+class GetLatestPostsUsecase(private val repository: PostRepository) :
+    UseCase<String, List<Post>>() {
+    override suspend fun execute(param: String): Flow<List<Post>> = repository.listPosts(param)
 
-    override suspend fun execute(): Flow<List<Post>> = repository.listPosts()
 
 }
