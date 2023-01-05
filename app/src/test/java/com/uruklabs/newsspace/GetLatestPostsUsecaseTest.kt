@@ -1,5 +1,6 @@
 package com.uruklabs.newsspace
 
+import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
 import com.uruklabs.newsspace.data.model.Post
 import com.uruklabs.newsspace.domain.GetLatestPostsUsecase
 import kotlinx.coroutines.flow.Flow
@@ -41,7 +42,7 @@ class GetLatestPostsUsecaseTest : KoinTest {
     @Test
     fun deve_RetornarResultadoNaoNulo_AoConectarComRepositorio() {
         runBlocking {
-            val result = getLatestPostsUsecase()
+            val result = getLatestPostsUsecase(SpaceFlightNewsCategory.ARTICLES.value)
 
             assertNotNull(result)
         }
@@ -50,7 +51,7 @@ class GetLatestPostsUsecaseTest : KoinTest {
     @Test
     fun deve_RetornarObjetoDoTipoCorreto_AoConectarComRepositorio(){
         runBlocking {
-            val result = getLatestPostsUsecase()
+            val result = getLatestPostsUsecase(SpaceFlightNewsCategory.ARTICLES.value)
 
             assertTrue(result is Flow<List<Post>>)
         }
@@ -59,7 +60,7 @@ class GetLatestPostsUsecaseTest : KoinTest {
     @Test
     fun deve_RetornarResultadoNaoVazio_AoConectarComRepositorio(){
         runBlocking {
-            val result = getLatestPostsUsecase()
+            val result = getLatestPostsUsecase(SpaceFlightNewsCategory.ARTICLES.value)
 
             assertFalse(result.first().isEmpty())
         }
