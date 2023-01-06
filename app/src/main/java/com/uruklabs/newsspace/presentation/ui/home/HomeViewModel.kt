@@ -59,7 +59,6 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUsecase) : 
 
     fun fethLatest(category: SpaceFlightNewsCategory) {
         fetchPosts(category.value)
-        _category.value = category
     }
 
 
@@ -83,6 +82,7 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUsecase) : 
                 }
                 .collect {
                     _listPost.value = State.Success(it)
+                    _category.value = enumValueOf<SpaceFlightNewsCategory>(query.uppercase())
                 }
         }
     }
