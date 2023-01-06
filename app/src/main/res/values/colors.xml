@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="light_grey">#FF4c5965</color>
-    <color name="medium_gray">#FF23303B</color>
+    <color name="medium_gray">#232F3B</color>
     <color name="dark_grey">#FF000715</color>
     <color name="gradient_cherry_medium">#FFd92949</color>
     <color name="gradient_cherry_dark">#FFA00022</color>
@@ -10,4 +10,6 @@
     <color name="black">#FF000000</color>
     <color name="off_white">#FFF1F1F1</color>
     <color name="transparent">#00000000</color>
+    <color name="blue_dark">#151C23</color>
+    <color name="red_bg">#D7294A</color>
 </resources>

@@ -2,9 +2,10 @@
 <resources>
 
     <style name="ChipText">
-        <item name="android:paddingTop">@dimen/half_margin</item>
+
         <item name="android:fontFamily">@font/noto_serif</item>
-        <item name="android:textColor">@color/design_default_color_on_primary</item>
+        <item name="android:textColor">@color/off_white</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">12sp</item>
     </style>
 
