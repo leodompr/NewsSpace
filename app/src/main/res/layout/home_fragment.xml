@@ -29,7 +29,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/gradient_rectangle"
-                app:title="@string/HomeToolbarTitle" />
+                toolbarTitle="@{viewModel.category}"
+                />
 
             <TextView
                 android:id="@+id/home_hello_text"

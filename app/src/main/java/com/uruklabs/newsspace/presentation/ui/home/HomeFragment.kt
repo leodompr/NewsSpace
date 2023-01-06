@@ -13,9 +13,7 @@ import com.uruklabs.newsspace.databinding.HomeFragmentBinding
 import com.uruklabs.newsspace.presentation.adapter.PostListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * Essa classe representa o fragmento da tela Home.
- */
+
 class HomeFragment : Fragment() {
 
 
@@ -101,12 +99,6 @@ class HomeFragment : Fragment() {
     }
 
 
-    /**
-     * Esse companion object é código boilerplate que provavelmente
-     * não será usado.
-     */
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
+
 
 }

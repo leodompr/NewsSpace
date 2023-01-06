@@ -34,20 +34,32 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUsecase) : 
     val snackbar: LiveData<String?>
         get() = _snackBar
 
+    /**
+     * Remove a snackBar após ela ser exibida
+     * **/
     fun onSnackBarShown() {
         _snackBar.value = null
     }
+
+    /** Configura o que esta sendo exibido da seleção do Menu, por padrão ao iniciar é exibido os Artigos **/
+    private val _category = MutableLiveData<SpaceFlightNewsCategory>().apply {
+        value = SpaceFlightNewsCategory.ARTICLES
+    }
+    val category : LiveData<SpaceFlightNewsCategory>
+        get() = _category
+
 
     private val _listPost = MutableLiveData<State<List<Post>>>()
     val listPost: LiveData<State<List<Post>>>
         get() = _listPost
 
     init {
-        fetchPosts()
+        fethLatest(_category.value ?: SpaceFlightNewsCategory.ARTICLES)
     }
 
     fun fethLatest(category: SpaceFlightNewsCategory) {
-        fetchPosts(category)
+        fetchPosts(category.value)
+        _category.value = category
     }
 
 

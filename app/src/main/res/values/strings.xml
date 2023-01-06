@@ -5,4 +5,7 @@
     <string name="articles">Articles</string>
     <string name="blogs">Blogs</string>
     <string name="reports">Reports</string>
+    <string name="latest_news">Latest News</string>
+    <string name="latest_blogs">Latest Blogs</string>
+    <string name="latest_reports">Latest Reports</string>
 </resources>
