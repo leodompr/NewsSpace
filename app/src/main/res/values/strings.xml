@@ -9,4 +9,5 @@
     <string name="latest_blogs">Latest Blogs</string>
     <string name="latest_reports">Latest Reports</string>
     <string name="search">Search</string>
+    <string name="search_in_hint">Search in </string>
 </resources>

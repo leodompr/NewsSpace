@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.uruklabs.newsspace.R
 import com.uruklabs.newsspace.core.State
 import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
+import com.uruklabs.newsspace.data.SpaceFlightNewsCategory.*
 import com.uruklabs.newsspace.databinding.HomeFragmentBinding
 import com.uruklabs.newsspace.presentation.adapter.PostListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,6 +23,7 @@ class HomeFragment : Fragment() {
     private val binding: HomeFragmentBinding by lazy {
         HomeFragmentBinding.inflate(layoutInflater)
     }
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,25 +34,69 @@ class HomeFragment : Fragment() {
         initSnackbar()
         initRecyclerView()
         initMainMenu()
+        initSearch()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initQuerySearchHintObserver()
     }
 
     private fun initMainMenu() {
         with(binding.homeToolbar) {
             this.inflateMenu(R.menu.main_menu)
             menu.findItem(R.id.action_get_articles).setOnMenuItemClickListener {
-                viewModel.fethLatest(SpaceFlightNewsCategory.ARTICLES)
+                viewModel.fethLatest(ARTICLES)
                 true
             }
             menu.findItem(R.id.action_get_blogs).setOnMenuItemClickListener {
-                viewModel.fethLatest(SpaceFlightNewsCategory.BLOGS)
+                viewModel.fethLatest(BLOGS)
                 true
             }
             menu.findItem(R.id.action_get_reports).setOnMenuItemClickListener {
-                viewModel.fethLatest(SpaceFlightNewsCategory.REPORTS)
+                viewModel.fethLatest(REPORTS)
                 true
             }
+        }
+    }
+
+
+    private fun initQuerySearchHintObserver() {
+        viewModel.category.observe(viewLifecycleOwner) {
+            searchView.queryHint = getString(R.string.search_in_hint) + when (it) {
+                ARTICLES -> getString(R.string.articles)
+                BLOGS -> getString(R.string.blogs)
+                REPORTS -> getString(R.string.reports)
+            }
+        }
+
+
+    }
+
+    private fun initSearch() {
+        with(binding.homeToolbar) {
+            val searchItem = menu.findItem(R.id.action_search)
+            searchView = searchItem.actionView as SearchView
+            searchView.isIconified = false
+
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    val searchString = searchView.query.toString()
+                    viewModel.searchPostsByTile(searchString)
+                    searchView.clearFocus()
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    newText?.let {
+                        viewModel.searchPostsByTile(it)
+                    }
+                    return true
+                }
+
+            })
         }
     }
 
@@ -97,8 +144,6 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
     }
-
-
 
 
 }
