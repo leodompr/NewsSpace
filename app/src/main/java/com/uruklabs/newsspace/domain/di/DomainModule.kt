@@ -1,6 +1,6 @@
 package com.uruklabs.newsspace.domain.di
 
-import com.uruklabs.newsspace.domain.GetLatestPostsUsecase
+import com.uruklabs.newsspace.domain.GetLatestPostsUseCase
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -13,7 +13,7 @@ object DomainModule {
 
     private fun useCaseModule(): Module {
         return module {
-            factory { GetLatestPostsUsecase(get()) }
+            factory { GetLatestPostsUseCase(get()) }
         }
     }
 
