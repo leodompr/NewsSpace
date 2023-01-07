@@ -48,11 +48,11 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
 
     }
 
-    private fun <ResultType, RequestType> netWorkBoundResource(
+    inline fun <ResultType, RequestType> netWorkBoundResource(
         category: String,
-        query: () -> Flow<ResultType>,
-        fetch: suspend (String) -> RequestType,
-        saveFetchResult: suspend (RequestType) -> Unit
+        crossinline query: () -> Flow<ResultType>,
+        crossinline fetch: suspend (String) -> RequestType,
+        crossinline saveFetchResult: suspend (RequestType) -> Unit
     ): Flow<Resouce<ResultType>> = flow {
 
         //consulta o banco de dados local
