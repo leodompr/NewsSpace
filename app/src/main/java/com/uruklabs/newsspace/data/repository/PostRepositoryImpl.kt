@@ -3,10 +3,8 @@ package com.uruklabs.newsspace.data.repository
 import android.os.RemoteException
 import com.uruklabs.newsspace.core.Resouce
 import com.uruklabs.newsspace.data.dao.PostDao
-import com.uruklabs.newsspace.data.entites.database.PostDB
 import com.uruklabs.newsspace.data.entites.database.toModel
 import com.uruklabs.newsspace.data.entites.model.Post
-import com.uruklabs.newsspace.data.entites.network.PostDTO
 import com.uruklabs.newsspace.data.entites.network.toDB
 import com.uruklabs.newsspace.data.entites.network.toModel
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
@@ -27,7 +25,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
                 dao.getListPosts().map {
                     it.sortedBy { post ->
                         post.publishedAt
-                    }.reversed()
+                    }.reversed().toModel()
                 }
             },
             fetch = { service.getListPosts(category) },
@@ -50,12 +48,12 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
 
     }
 
-    private fun netWorkBoundResource(
+    private fun <ResultType, RequestType> netWorkBoundResource(
         category: String,
-        query: () -> Flow<List<PostDB>>,
-        fetch: suspend (String) -> List<PostDTO>,
-        saveFetchResult: suspend (List<PostDTO>) -> Unit
-    ): Flow<Resouce<List<Post>>> = flow {
+        query: () -> Flow<ResultType>,
+        fetch: suspend (String) -> RequestType,
+        saveFetchResult: suspend (RequestType) -> Unit
+    ): Flow<Resouce<ResultType>> = flow {
 
         //consulta o banco de dados local
         var data = query().first()
@@ -68,10 +66,10 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
 
         } catch (ex: Exception) {
             val error = RemoteException("Error in connect, results view as cached")
-            emit(Resouce.Error(data = data.toModel(), error = error))
+            emit(Resouce.Error(data = data, error = error))
         }
 
-        emit(Resouce.Success(data = data.toModel()))
+        emit(Resouce.Success(data = data))
 
     }
 
