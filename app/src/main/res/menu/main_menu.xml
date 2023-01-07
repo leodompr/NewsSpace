@@ -2,16 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_get_articles"
+    <item
+        android:id="@+id/action_get_articles"
         android:title="@string/articles"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
-    <item android:id="@+id/action_get_blogs"
+    <item
+        android:id="@+id/action_get_blogs"
         android:title="@string/blogs"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
-    <item android:id="@+id/action_get_reports"
+    <item
+        android:id="@+id/action_get_reports"
         android:title="@string/reports"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="collapseActionView|always" />
 
 </menu>
