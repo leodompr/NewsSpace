@@ -23,6 +23,7 @@ class SpaceFlightNewsServiceTest {
     lateinit var mockWebServer: MockWebServer
     lateinit var service: SpaceFightNewsServices
 
+    //Antes de cada teste
     @Before
     fun createService() {
         val factory = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -34,6 +35,7 @@ class SpaceFlightNewsServiceTest {
             .create(SpaceFightNewsServices::class.java)
     }
 
+    //Após cada teste
     @After
     fun stopService(){
         mockWebServer.shutdown()
@@ -43,21 +45,44 @@ class SpaceFlightNewsServiceTest {
     fun deve_AlcancarOEndPointCorreto_AoReceberParametro(){
         runBlocking {
             mockWebServer.enqueue(MockResponse().setBody("[]"))
-            val result1 = service.listPosts(SpaceFlightNewsCategory.ARTICLES.value)
+            val result1 = service.getListPosts(SpaceFlightNewsCategory.ARTICLES.value)
             val request1 = mockWebServer.takeRequest()
             assertEquals(request1.path, "/articles")
 
             mockWebServer.enqueue(MockResponse().setBody("[]"))
-            val result2 = service.listPosts(SpaceFlightNewsCategory.BLOGS.value)
+            val result2 = service.getListPosts(SpaceFlightNewsCategory.BLOGS.value)
             val request2 = mockWebServer.takeRequest()
             assertEquals(request2.path, "/blogs")
 
             mockWebServer.enqueue(MockResponse().setBody("[]"))
-            val result3 = service.listPosts(SpaceFlightNewsCategory.REPORTS.value)
+            val result3 = service.getListPosts(SpaceFlightNewsCategory.REPORTS.value)
             val request3 = mockWebServer.takeRequest()
             assertEquals(request3.path, "/reports")
 
         }
     }
+
+
+    @Test
+    fun deve_AlcancarOEndPointCorreto_AoReceberQueryComOption(){
+        runBlocking {
+            mockWebServer.enqueue(MockResponse().setBody("[]"))
+            service.getListPostsByTitle("articles", "moon")
+            val request = mockWebServer.takeRequest()
+            assertEquals(request.path, "/articles?title_contains=moon")
+        }
+    }
+
+    @Test
+    fun deve_AlcancarOEndPointCorreto_AoReceberQueryComOptionNull(){
+        runBlocking {
+            mockWebServer.enqueue(MockResponse().setBody("[]"))
+            service.getListPostsByTitle("articles", null)
+            val request = mockWebServer.takeRequest()
+            assertEquals(request.path, "/articles")
+        }
+
+    }
+
 
 }
