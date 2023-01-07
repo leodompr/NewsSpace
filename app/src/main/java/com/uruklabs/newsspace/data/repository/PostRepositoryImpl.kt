@@ -13,6 +13,7 @@ import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 
 
@@ -22,7 +23,13 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
     override suspend fun getlistPosts(category: String): Flow<Resouce<List<Post>>> =
         netWorkBoundResource(
             category,
-            query = { dao.getListPosts() },
+            query = {
+                dao.getListPosts().map {
+                    it.sortedBy { post ->
+                        post.publishedAt
+                    }.reversed()
+                }
+            },
             fetch = { service.getListPosts(category) },
             saveFetchResult = {
                 dao.clearDB()
