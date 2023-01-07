@@ -9,5 +9,8 @@ import kotlinx.coroutines.flow.Flow
  */
 interface PostRepository {
 
-    suspend fun listPosts(category: String): Flow<List<Post>>
+    suspend fun getlistPosts(category: String): Flow<List<Post>>
+
+    suspend fun getlistPostsByTitle(category: String, query : String?): Flow<List<Post>>
+
 }
