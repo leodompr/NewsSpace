@@ -20,7 +20,14 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
     PostRepository {
 
     override suspend fun getlistPosts(category: String): Flow<Resouce<List<Post>>> =
-        netWorkBoundResource(category, query = { dao.getListPosts() }, fetch = { service.getListPosts(category) })
+        netWorkBoundResource(
+            category,
+            query = { dao.getListPosts() },
+            fetch = { service.getListPosts(category) },
+            saveFetchResult = {
+                dao.clearDB()
+                dao.saveAll(it)
+            })
 
     override suspend fun getlistPostsByTitle(category: String, query: String?): Flow<List<Post>> {
         return flow {
@@ -39,7 +46,8 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
     private fun netWorkBoundResource(
         category: String,
         query: () -> Flow<List<PostDB>>,
-        fetch: suspend (String) -> List<PostDTO>
+        fetch: suspend (String) -> List<PostDTO>,
+        saveFetchResult: suspend (List<PostDB>) -> Unit
     ): Flow<Resouce<List<Post>>> = flow {
 
         //consulta o banco de dados local
@@ -48,14 +56,9 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
         //consulta a api
         try {
             //se a api nao retorna vazio, limpa o cache local e salva os novos resultados
-            //fetch:
-            with(fetch(category)) {
-                if (this.isNotEmpty()) {
-                    dao.clearDB()
-                    dao.saveAll(this.toDB())
-                }
-                data = query().first()
-            }
+            saveFetchResult(fetch(category).toDB())
+            data = query().first()
+
         } catch (ex: Exception) {
             val error = RemoteException("Error in connect, results view as cached")
             emit(Resouce.Error(data = data.toModel(), error = error))
