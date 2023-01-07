@@ -1,8 +1,8 @@
 package com.uruklabs.newsspace
 
-import com.uruklabs.newsspace.data.model.Post
-import com.uruklabs.newsspace.data.network.LaunchDTO
-import com.uruklabs.newsspace.data.network.PostDTO
+import com.uruklabs.newsspace.data.entites.model.Post
+import com.uruklabs.newsspace.data.entites.network.LaunchDTO
+import com.uruklabs.newsspace.data.entites.network.PostDTO
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

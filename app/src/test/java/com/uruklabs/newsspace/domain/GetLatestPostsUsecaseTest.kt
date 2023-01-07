@@ -3,7 +3,7 @@ package com.uruklabs.newsspace.domain
 import com.uruklabs.newsspace.configureTestAppComponent
 import com.uruklabs.newsspace.core.Query
 import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
-import com.uruklabs.newsspace.data.model.Post
+import com.uruklabs.newsspace.data.entites.model.Post
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking

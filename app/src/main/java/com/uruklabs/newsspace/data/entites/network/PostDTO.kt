@@ -1,7 +1,7 @@
-package com.uruklabs.newsspace.data.network
+package com.uruklabs.newsspace.data.entites.network
 
-import com.uruklabs.newsspace.data.model.Launch
-import com.uruklabs.newsspace.data.model.Post
+import com.uruklabs.newsspace.data.entites.model.Launch
+import com.uruklabs.newsspace.data.entites.model.Post
 
 data class PostDTO(
     val id: Int,

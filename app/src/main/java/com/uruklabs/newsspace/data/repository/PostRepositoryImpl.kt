@@ -1,8 +1,8 @@
 package com.uruklabs.newsspace.data.repository
 
 import android.os.RemoteException
-import com.uruklabs.newsspace.data.model.Post
-import com.uruklabs.newsspace.data.network.toModel
+import com.uruklabs.newsspace.data.entites.model.Post
+import com.uruklabs.newsspace.data.entites.network.toModel
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

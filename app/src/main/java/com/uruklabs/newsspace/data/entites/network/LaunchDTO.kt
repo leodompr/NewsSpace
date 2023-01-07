@@ -1,6 +1,6 @@
-package com.uruklabs.newsspace.data.network
+package com.uruklabs.newsspace.data.entites.network
 
-import com.uruklabs.newsspace.data.model.Launch
+import com.uruklabs.newsspace.data.entites.model.Launch
 
 data class LaunchDTO(
     val id: String,

@@ -5,7 +5,7 @@ import com.uruklabs.newsspace.core.Query
 import com.uruklabs.newsspace.core.RemoteException
 import com.uruklabs.newsspace.core.State
 import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
-import com.uruklabs.newsspace.data.model.Post
+import com.uruklabs.newsspace.data.entites.model.Post
 import com.uruklabs.newsspace.domain.GetLatestPostsByTitleUseCase
 import com.uruklabs.newsspace.domain.GetLatestPostsUseCase
 import kotlinx.coroutines.delay

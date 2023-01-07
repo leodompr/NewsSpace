@@ -1,4 +1,4 @@
-package com.uruklabs.newsspace.data.model
+package com.uruklabs.newsspace.data.entites.model
 
 /**
  * Essa data class representa uma publicação; os artigos, postagens

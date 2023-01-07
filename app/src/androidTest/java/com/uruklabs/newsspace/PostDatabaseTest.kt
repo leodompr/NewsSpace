@@ -1,7 +1,9 @@
 package com.uruklabs.newsspace
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.uruklabs.newsspace.data.model.Post
+import com.uruklabs.newsspace.data.entites.database.LaunchDB
+import com.uruklabs.newsspace.data.entites.database.PostDB
+import com.uruklabs.newsspace.data.entites.model.Post
 import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -75,7 +77,7 @@ class PostDatabaseTest {
     fun deve_LimparBancoDeDadosLocal_AoChamarFuncaoCorrespondente() {
         lateinit var result: List<PostDB>
         dao.saveAll(listDbPosts)
-        dao.clearDb()
+        dao.clearDB()
         result = dao.getListPosts().firts()
         assertTrue(result.isEmpty())
     }

@@ -1,7 +1,7 @@
 package com.uruklabs.newsspace.data.services
 
-import com.uruklabs.newsspace.data.model.Post
-import com.uruklabs.newsspace.data.network.PostDTO
+import com.uruklabs.newsspace.data.entites.model.Post
+import com.uruklabs.newsspace.data.entites.network.PostDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

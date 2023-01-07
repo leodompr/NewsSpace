@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.uruklabs.newsspace.data.model.Post
+import com.uruklabs.newsspace.data.entites.model.Post
 import com.uruklabs.newsspace.databinding.ItemPostBinding
 
 /**

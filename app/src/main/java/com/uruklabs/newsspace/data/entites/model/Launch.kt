@@ -1,4 +1,4 @@
-package com.uruklabs.newsspace.data.model
+package com.uruklabs.newsspace.data.entites.model
 
 /**
  * Essa data class representa um evento de lançamento conforme

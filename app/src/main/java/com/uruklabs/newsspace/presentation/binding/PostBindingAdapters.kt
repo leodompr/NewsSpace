@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.uruklabs.newsspace.data.model.Post
+import com.uruklabs.newsspace.data.entites.model.Post
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.uruklabs.newsspace.R

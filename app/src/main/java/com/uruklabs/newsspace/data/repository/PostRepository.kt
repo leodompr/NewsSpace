@@ -1,6 +1,6 @@
 package com.uruklabs.newsspace.data.repository
 
-import com.uruklabs.newsspace.data.model.Post
+import com.uruklabs.newsspace.data.entites.model.Post
 import kotlinx.coroutines.flow.Flow
 
 /**
