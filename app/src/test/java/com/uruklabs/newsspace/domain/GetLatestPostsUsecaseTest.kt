@@ -54,7 +54,7 @@ class GetLatestPostsUsecaseTest : KoinTest {
         runBlocking {
             val result = getLatestPostsUsecase(Query(type = SpaceFlightNewsCategory.ARTICLES.value))
 
-            assertTrue(result is Flow<List<Post>>)
+            assertTrue(result is Flow<*>)
         }
     }
 
@@ -63,7 +63,7 @@ class GetLatestPostsUsecaseTest : KoinTest {
         runBlocking {
             val result = getLatestPostsUsecase(Query(type = SpaceFlightNewsCategory.ARTICLES.value))
 
-            assertFalse(result.first().isEmpty())
+            assertFalse(result.first().data!!.isEmpty())
         }
     }
 
