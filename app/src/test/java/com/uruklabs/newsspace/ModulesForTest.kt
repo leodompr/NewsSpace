@@ -5,6 +5,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.uruklabs.newsspace.data.repository.PostRepository
 import com.uruklabs.newsspace.data.repository.PostRepositoryImpl
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
+import com.uruklabs.newsspace.domain.GetLatestPostsByTitleUseCase
 import com.uruklabs.newsspace.domain.GetLatestPostsUseCase
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -13,6 +14,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 fun configureDomainModuleForTest() = module {
 
     factory<GetLatestPostsUseCase> { GetLatestPostsUseCase(get()) }
+    factory<GetLatestPostsByTitleUseCase> { GetLatestPostsByTitleUseCase(get()) }
 
 }
 

@@ -17,7 +17,7 @@ class GetLatestPostsByTitleUseCaseTest : KoinTest {
 
     val getLatestPostsByTitleUseCase: GetLatestPostsByTitleUseCase by inject()
     private val type = SpaceFlightNewsCategory.ARTICLES.value
-    private val query = "Moon"
+    private val query = "moon"
 
     companion object {
 
@@ -42,7 +42,7 @@ class GetLatestPostsByTitleUseCaseTest : KoinTest {
             val result = getLatestPostsByTitleUseCase(arrayOf(type, query))
             var assertion = true
             result.first().forEach {
-                assertion = assertion && it.title.contains(query)
+                assertion = assertion && it.title.lowercase().contains(query)
             }
             assertTrue(assertion)
         }
