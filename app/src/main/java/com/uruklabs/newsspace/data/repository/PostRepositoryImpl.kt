@@ -20,7 +20,6 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
 
     override suspend fun getlistPosts(category: String): Flow<Resouce<List<Post>>> =
         netWorkBoundResource(
-            category,
             query = {
                 dao.getListPosts().map {
                     it.sortedBy { post ->
@@ -34,24 +33,28 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
                 dao.saveAll(it.toDB())
             })
 
-    override suspend fun getlistPostsByTitle(category: String, query: String?): Flow<List<Post>> {
-        return flow {
 
-            try {
-                val postList = service.getListPostsByTitle(category, query).toModel()
-                emit(postList)
-            } catch (e: HttpException) {
-                throw RemoteException("Unable to conncet to SpaceFlight News Api")
+    override suspend fun getlistPostsByTitle(
+        category: String,
+        query: String?
+    ): Flow<Resouce<List<Post>>> = netWorkBoundResource(
+        query = {
+            dao.getListPosts().map {
+                it.sortedBy { post ->
+                    post.publishedAt
+                }.reversed().toModel()
             }
+        },
+        fetch = { service.getListPostsByTitle(type = category, query = query) },
+        saveFetchResult = {
+            dao.clearDB()
+            dao.saveAll(it.toDB())
+        })
 
-        }
-
-    }
 
     inline fun <ResultType, RequestType> netWorkBoundResource(
-        category: String,
         crossinline query: () -> Flow<ResultType>,
-        crossinline fetch: suspend (String) -> RequestType,
+        crossinline fetch: suspend () -> RequestType,
         crossinline saveFetchResult: suspend (RequestType) -> Unit
     ): Flow<Resouce<ResultType>> = flow {
 
@@ -61,7 +64,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
         //consulta a api
         try {
             //se a api nao retorna vazio, limpa o cache local e salva os novos resultados
-            saveFetchResult(fetch(category))
+            saveFetchResult(fetch())
             data = query().first()
 
         } catch (ex: Exception) {
