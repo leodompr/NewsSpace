@@ -1,6 +1,7 @@
 package com.uruklabs.newsspace.domain
 
 import com.uruklabs.newsspace.configureTestAppComponent
+import com.uruklabs.newsspace.core.Query
 import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -18,6 +19,7 @@ class GetLatestPostsByTitleUseCaseTest : KoinTest {
     val getLatestPostsByTitleUseCase: GetLatestPostsByTitleUseCase by inject()
     private val type = SpaceFlightNewsCategory.ARTICLES.value
     private val query = "moon"
+    private val queryData = Query(type = type, query = query)
 
     companion object {
 
@@ -39,7 +41,7 @@ class GetLatestPostsByTitleUseCaseTest : KoinTest {
     @Test
     fun deve_RetornarResultadosValidos_AoExecutarBusca() {
         runBlocking {
-            val result = getLatestPostsByTitleUseCase(arrayOf(type, query))
+            val result = getLatestPostsByTitleUseCase(queryData)
             var assertion = true
             result.first().forEach {
                 assertion = assertion && it.title.lowercase().contains(query)
