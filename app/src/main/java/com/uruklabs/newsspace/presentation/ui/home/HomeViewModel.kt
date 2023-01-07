@@ -92,6 +92,31 @@ class HomeViewModel(
         }
     }
 
+
+    private fun fetchPostsByTitle(query: Query) {
+        viewModelScope.launch {
+            getLatestPostsByTitleUseCase(query)
+                .onStart {
+                    //Faça algo no comecço do flow
+                    _listPost.postValue(State.Loading)
+                }
+                .catch {
+                    //trate uma Exc
+                    val exception = RemoteException("Unable to connect to SpaceFlightNews API")
+                    _listPost.postValue(State.Error(exception))
+                    _snackBar.value = exception.message
+                }
+                .collect {
+                    _listPost.value = State.Success(it)
+                    _category.value = enumValueOf<SpaceFlightNewsCategory>(query.type.uppercase())
+                }
+        }
+    }
+
+    fun searchPostsByTile(queryStr : String) {
+        fetchPostsByTitle(Query(_category.value.toString(), query = queryStr))
+    }
+
     val helloText = Transformations.map(listPost) { state ->
         when (state) {
             State.Loading -> {
