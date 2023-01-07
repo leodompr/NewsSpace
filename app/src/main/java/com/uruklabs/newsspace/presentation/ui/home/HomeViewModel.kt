@@ -86,7 +86,13 @@ class HomeViewModel(
                     _snackBar.value = exception.message
                 }
                 .collect {
-                    _listPost.value = State.Success(it)
+                    it.data?.let { list ->
+                        _listPost.value = State.Success(list)
+                    }
+                    it.error?.let { errorMsg ->
+                        _snackBar.value = errorMsg.message
+                    }
+
                     _category.value = enumValueOf<SpaceFlightNewsCategory>(query.type.uppercase())
                 }
         }
@@ -113,7 +119,7 @@ class HomeViewModel(
         }
     }
 
-    fun searchPostsByTile(queryStr : String) {
+    fun searchPostsByTile(queryStr: String) {
         fetchPostsByTitle(Query(_category.value.toString(), query = queryStr))
     }
 

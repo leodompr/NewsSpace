@@ -1,5 +1,6 @@
 package com.uruklabs.newsspace.data.repository
 
+import com.uruklabs.newsspace.core.Resouce
 import com.uruklabs.newsspace.data.entites.model.Post
 import kotlinx.coroutines.flow.Flow
 
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface PostRepository {
 
-    suspend fun getlistPosts(category: String): Flow<List<Post>>
+    suspend fun getlistPosts(category: String): Flow<Resouce<List<Post>>>
 
     suspend fun getlistPostsByTitle(category: String, query : String?): Flow<List<Post>>
 
