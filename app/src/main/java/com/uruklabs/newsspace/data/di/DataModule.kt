@@ -1,13 +1,15 @@
 package com.uruklabs.newsspace.data.di
 
 import android.util.Log
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.uruklabs.newsspace.data.dao.databse.PostDatabase
 import com.uruklabs.newsspace.data.repository.PostRepository
 import com.uruklabs.newsspace.data.repository.PostRepositoryImpl
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -20,16 +22,22 @@ object DataModule {
     private const val OK_HTTP = "okhttp"
 
     fun load() {
-        loadKoinModules(postsModule() + networkModule())
+        loadKoinModules(postsModule() + networkModule() + daoModule())
     }
 
     private fun postsModule(): Module {
         return module {
-            single<PostRepository> { PostRepositoryImpl(get()) }
+            single<PostRepository> { PostRepositoryImpl(service = get(), dao = get()) }
         }
     }
 
-    private inline fun <reified T>createService(
+    private fun daoModule(): Module {
+        return module {
+            single { PostDatabase.getInstance(androidContext()).dao }
+        }
+    }
+
+    private inline fun <reified T> createService(
         factory: Moshi,
         client: OkHttpClient
     ): T {

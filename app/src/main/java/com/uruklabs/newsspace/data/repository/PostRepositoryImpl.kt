@@ -1,6 +1,7 @@
 package com.uruklabs.newsspace.data.repository
 
 import android.os.RemoteException
+import com.uruklabs.newsspace.data.dao.PostDao
 import com.uruklabs.newsspace.data.entites.model.Post
 import com.uruklabs.newsspace.data.entites.network.toModel
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
 
-class PostRepositoryImpl(private val service: SpaceFightNewsServices) : PostRepository {
+class PostRepositoryImpl(private val service: SpaceFightNewsServices, private val dao: PostDao) : PostRepository {
 
     override suspend fun getlistPosts(category: String): Flow<List<Post>> = flow {
 
