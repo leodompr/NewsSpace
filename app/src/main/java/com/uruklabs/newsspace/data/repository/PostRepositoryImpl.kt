@@ -3,6 +3,7 @@ package com.uruklabs.newsspace.data.repository
 import android.os.RemoteException
 import com.uruklabs.newsspace.core.Resouce
 import com.uruklabs.newsspace.data.dao.PostDao
+import com.uruklabs.newsspace.data.entites.database.PostDB
 import com.uruklabs.newsspace.data.entites.database.toModel
 import com.uruklabs.newsspace.data.entites.model.Post
 import com.uruklabs.newsspace.data.entites.network.toDB
@@ -18,7 +19,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
     PostRepository {
 
     override suspend fun getlistPosts(category: String): Flow<Resouce<List<Post>>> =
-        netWorkBoundResource(category)
+        netWorkBoundResource(category, query = { dao.getListPosts() })
 
     override suspend fun getlistPostsByTitle(category: String, query: String?): Flow<List<Post>> {
         return flow {
@@ -34,10 +35,13 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
 
     }
 
-    private fun netWorkBoundResource(category: String): Flow<Resouce<List<Post>>> = flow {
+    private fun netWorkBoundResource(
+        category: String,
+        query: () -> Flow<List<PostDB>>
+    ): Flow<Resouce<List<Post>>> = flow {
 
         //consulta o banco de dados local
-        var data = dao.getListPosts().first()
+        var data = query().first()
 
         //consulta a api
         try {
@@ -47,7 +51,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
                     dao.clearDB()
                     dao.saveAll(this.toDB())
                 }
-                data = dao.getListPosts().first()
+                data = query().first()
             }
         } catch (ex: Exception) {
             val error = RemoteException("Error in connect, results view as cached")
