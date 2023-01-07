@@ -2,6 +2,7 @@ package com.uruklabs.newsspace.data.repository
 
 import android.os.RemoteException
 import com.uruklabs.newsspace.data.model.Post
+import com.uruklabs.newsspace.data.network.toModel
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -13,7 +14,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices) : PostRepo
     override suspend fun getlistPosts(category: String): Flow<List<Post>> = flow {
 
         try {
-            val postList = service.getListPosts(category)
+            val postList = service.getListPosts(category).toModel()
             emit(postList)
         } catch (e: HttpException) {
             throw RemoteException("Unable to conncet to SpaceFlight News Api")
@@ -25,7 +26,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices) : PostRepo
         flow {
 
             try {
-                val postList = service.getListPostsByTitle(category, query)
+                val postList = service.getListPostsByTitle(category, query).toModel()
                 emit(postList)
             } catch (e: HttpException) {
                 throw RemoteException("Unable to conncet to SpaceFlight News Api")
