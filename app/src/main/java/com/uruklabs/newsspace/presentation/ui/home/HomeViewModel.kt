@@ -1,6 +1,7 @@
 package com.uruklabs.newsspace.presentation.ui.home
 
 import androidx.lifecycle.*
+import com.uruklabs.newsspace.core.Query
 import com.uruklabs.newsspace.core.RemoteException
 import com.uruklabs.newsspace.core.State
 import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
@@ -45,7 +46,7 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUseCase) : 
     private val _category = MutableLiveData<SpaceFlightNewsCategory>().apply {
         value = SpaceFlightNewsCategory.ARTICLES
     }
-    val category : LiveData<SpaceFlightNewsCategory>
+    val category: LiveData<SpaceFlightNewsCategory>
         get() = _category
 
 
@@ -58,7 +59,7 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUseCase) : 
     }
 
     fun fethLatest(category: SpaceFlightNewsCategory) {
-        fetchPosts(category.value)
+        fetchPosts(Query(type = category.value))
     }
 
 
@@ -66,7 +67,7 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUseCase) : 
      * Esse método coleta o fluxo do repositorio e atribui
      * o seu valor ao campo _listPost
      */
-    private fun fetchPosts(query : String) {
+    private fun fetchPosts(query: Query) {
         viewModelScope.launch {
             getLatestPostsUsecase(query)
                 .onStart {
@@ -82,7 +83,7 @@ class HomeViewModel(private val getLatestPostsUsecase: GetLatestPostsUseCase) : 
                 }
                 .collect {
                     _listPost.value = State.Success(it)
-                    _category.value = enumValueOf<SpaceFlightNewsCategory>(query.uppercase())
+                    _category.value = enumValueOf<SpaceFlightNewsCategory>(query.type.uppercase())
                 }
         }
     }
