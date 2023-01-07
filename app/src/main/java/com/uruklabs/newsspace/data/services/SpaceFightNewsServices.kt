@@ -10,6 +10,6 @@ interface SpaceFightNewsServices {
 //    suspend fun listPosts() : List<Post>
 
     @GET("{type}")
-    suspend fun listPosts(@Path("type") type : String) : List<Post>
+    suspend fun getListPosts(@Path("type") type : String) : List<Post>
 
 }

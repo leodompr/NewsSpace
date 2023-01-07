@@ -24,7 +24,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices) : PostRepo
     override suspend fun listPosts(category: String): Flow<List<Post>> = flow {
 
         try {
-            val postList = service.listPosts(category)
+            val postList = service.getListPosts(category)
             emit(postList)
         } catch (e: HttpException) {
             throw RemoteException("Unable to conncet to SpaceFlight News Api")
