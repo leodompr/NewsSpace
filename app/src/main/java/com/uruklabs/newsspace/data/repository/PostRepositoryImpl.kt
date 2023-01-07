@@ -33,7 +33,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
             fetch = { service.getListPosts(category) },
             saveFetchResult = {
                 dao.clearDB()
-                dao.saveAll(it)
+                dao.saveAll(it.toDB())
             })
 
     override suspend fun getlistPostsByTitle(category: String, query: String?): Flow<List<Post>> {
@@ -54,7 +54,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
         category: String,
         query: () -> Flow<List<PostDB>>,
         fetch: suspend (String) -> List<PostDTO>,
-        saveFetchResult: suspend (List<PostDB>) -> Unit
+        saveFetchResult: suspend (List<PostDTO>) -> Unit
     ): Flow<Resouce<List<Post>>> = flow {
 
         //consulta o banco de dados local
@@ -63,7 +63,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
         //consulta a api
         try {
             //se a api nao retorna vazio, limpa o cache local e salva os novos resultados
-            saveFetchResult(fetch(category).toDB())
+            saveFetchResult(fetch(category))
             data = query().first()
 
         } catch (ex: Exception) {
