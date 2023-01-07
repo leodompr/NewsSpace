@@ -16,7 +16,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import kotlin.test.assertEquals
 
 
-
 @RunWith(JUnit4::class)
 class SpaceFlightNewsServiceTest {
 
@@ -37,34 +36,44 @@ class SpaceFlightNewsServiceTest {
 
     //Após cada teste
     @After
-    fun stopService(){
+    fun stopService() {
         mockWebServer.shutdown()
     }
 
+
     @Test
-    fun deve_AlcancarOEndPointCorreto_AoReceberParametro(){
+    fun deve_AlcancarOEndPointArticles_AoReceberPorParametro() {
         runBlocking {
             mockWebServer.enqueue(MockResponse().setBody("[]"))
             val result1 = service.getListPosts(SpaceFlightNewsCategory.ARTICLES.value)
             val request1 = mockWebServer.takeRequest()
             assertEquals(request1.path, "/articles")
+        }
+    }
 
-            mockWebServer.enqueue(MockResponse().setBody("[]"))
-            val result2 = service.getListPosts(SpaceFlightNewsCategory.BLOGS.value)
-            val request2 = mockWebServer.takeRequest()
-            assertEquals(request2.path, "/blogs")
-
+    @Test
+    fun deve_AlcancarOEndPointReports_AoReceberPorParametro() {
+        runBlocking {
             mockWebServer.enqueue(MockResponse().setBody("[]"))
             val result3 = service.getListPosts(SpaceFlightNewsCategory.REPORTS.value)
             val request3 = mockWebServer.takeRequest()
             assertEquals(request3.path, "/reports")
+        }
+    }
 
+    @Test
+    fun deve_AlcancarOEndPointBlogs_AoReceberPorParametro() {
+        runBlocking {
+            mockWebServer.enqueue(MockResponse().setBody("[]"))
+            val result2 = service.getListPosts(SpaceFlightNewsCategory.BLOGS.value)
+            val request2 = mockWebServer.takeRequest()
+            assertEquals(request2.path, "/blogs")
         }
     }
 
 
     @Test
-    fun deve_AlcancarOEndPointCorreto_AoReceberQueryComOption(){
+    fun deve_AlcancarOEndPointCorreto_AoReceberQueryComOption() {
         runBlocking {
             mockWebServer.enqueue(MockResponse().setBody("[]"))
             service.getListPostsByTitle("articles", "moon")
@@ -74,7 +83,7 @@ class SpaceFlightNewsServiceTest {
     }
 
     @Test
-    fun deve_AlcancarOEndPointCorreto_AoReceberQueryComOptionNull(){
+    fun deve_AlcancarOEndPointCorreto_AoReceberQueryComOptionNull() {
         runBlocking {
             mockWebServer.enqueue(MockResponse().setBody("[]"))
             service.getListPostsByTitle("articles", null)
