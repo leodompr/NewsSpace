@@ -6,6 +6,7 @@ import com.uruklabs.newsspace.data.dao.PostDao
 import com.uruklabs.newsspace.data.entites.database.PostDB
 import com.uruklabs.newsspace.data.entites.database.toModel
 import com.uruklabs.newsspace.data.entites.model.Post
+import com.uruklabs.newsspace.data.entites.network.PostDTO
 import com.uruklabs.newsspace.data.entites.network.toDB
 import com.uruklabs.newsspace.data.entites.network.toModel
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
@@ -19,7 +20,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
     PostRepository {
 
     override suspend fun getlistPosts(category: String): Flow<Resouce<List<Post>>> =
-        netWorkBoundResource(category, query = { dao.getListPosts() })
+        netWorkBoundResource(category, query = { dao.getListPosts() }, fetch = { service.getListPosts(category) })
 
     override suspend fun getlistPostsByTitle(category: String, query: String?): Flow<List<Post>> {
         return flow {
@@ -37,7 +38,8 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
 
     private fun netWorkBoundResource(
         category: String,
-        query: () -> Flow<List<PostDB>>
+        query: () -> Flow<List<PostDB>>,
+        fetch: suspend (String) -> List<PostDTO>
     ): Flow<Resouce<List<Post>>> = flow {
 
         //consulta o banco de dados local
@@ -46,7 +48,8 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
         //consulta a api
         try {
             //se a api nao retorna vazio, limpa o cache local e salva os novos resultados
-            with(service.getListPosts(category)) {
+            //fetch:
+            with(fetch(category)) {
                 if (this.isNotEmpty()) {
                     dao.clearDB()
                     dao.saveAll(this.toDB())
