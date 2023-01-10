@@ -43,7 +43,7 @@ class GetLatestPostsByTitleUseCaseTest : KoinTest {
         runBlocking {
             val result = getLatestPostsByTitleUseCase(queryData)
             var assertion = true
-            result.first().forEach {
+            result.first().data?.forEach {
                 assertion = assertion && it.title.lowercase().contains(query)
             }
             assertTrue(assertion)

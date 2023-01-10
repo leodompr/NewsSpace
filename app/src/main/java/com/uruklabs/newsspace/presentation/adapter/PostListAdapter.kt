@@ -14,14 +14,14 @@ import com.uruklabs.newsspace.databinding.ItemPostBinding
  * Como é um ListAdapter eu também não preciso manter um campo list
  * na classe Adapter.
  */
-class PostListAdapter : ListAdapter<Post, PostListAdapter.PostViewHolder>(PostDiffCallback()){
+class PostListAdapter(private val onClik : (Post) -> Unit) : ListAdapter<Post, PostListAdapter.PostViewHolder>(PostDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onClik)
     }
 
     /**
@@ -30,7 +30,6 @@ class PostListAdapter : ListAdapter<Post, PostListAdapter.PostViewHolder>(PostDi
      * ViewHolder e (2) delegar o binding dos dados para a própria classe ViewHolder.
      */
     class PostViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {
-
         companion object {
 
             /**
@@ -53,8 +52,12 @@ class PostListAdapter : ListAdapter<Post, PostListAdapter.PostViewHolder>(PostDi
          * vou precisar adicionar um campo clickListener para tratar os cliques
          * no item.
          */
-        fun bind(item: Post) {
+
+        fun bind(item: Post, onClik:(Post) -> Unit) {
             binding.post = item
+            itemView.setOnClickListener {
+                onClik(item)
+            }
         }
 
     }

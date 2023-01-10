@@ -95,21 +95,7 @@
                     app:layout_constraintTop_toBottomOf="@id/item_summary_tv" />
 
 <!-- A visibilidade desse chip é controlada pelo BindingAdapter -->
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/item_launch_ch"
-                    style="@style/ChipText"
-                    itemHasLaunch="@{post}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    app:chipBackgroundColor="@color/red_bg"
-                    app:chipCornerRadius="4dp"
-                    app:chipIcon="@drawable/ic_rocket"
-                    app:chipIconTint="@color/off_white"
-                    app:layout_constraintEnd_toStartOf="@id/item_favourite_btn"
-                    app:layout_constraintStart_toEndOf="@id/item_published_ch"
-                    app:layout_constraintTop_toBottomOf="@id/item_summary_tv"
-                    tools:text="1 launch event(s)" />
+
 
 
                 <ImageButton

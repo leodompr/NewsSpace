@@ -20,4 +20,8 @@ interface SpaceFightNewsServices {
         @Query("title_contains") query: String?
     ): List<PostDTO>
 
+
+
+
+
 }

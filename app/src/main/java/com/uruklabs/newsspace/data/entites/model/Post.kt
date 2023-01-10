@@ -14,7 +14,7 @@ data class Post(
     val publishedAt: String,
     val updatedAt: String?,
     var launches: Array<Launch> = emptyArray()
-) {
+) : java.io.Serializable {
     /**
      * A função hasLaunch() é um método de conveniência para
      * indicar se há lançamentos associados à notícia.

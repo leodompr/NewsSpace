@@ -9,5 +9,18 @@
         android:id="@+id/homeFragment"
         android:name="com.uruklabs.newsspace.presentation.ui.home.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_readPostFragment"
+            app:destination="@id/readPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/readPostFragment"
+        android:name="com.uruklabs.newsspace.presentation.ui.readpost.ReadPostFragment"
+        android:label="fragment_read_post"
+        tools:layout="@layout/fragment_read_post" >
+        <argument
+            android:name="post"
+            app:argType="com.uruklabs.newsspace.data.entites.model.Post" />
+    </fragment>
 </navigation>

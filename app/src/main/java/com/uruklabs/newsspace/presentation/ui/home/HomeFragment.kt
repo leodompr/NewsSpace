@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.uruklabs.newsspace.R
 import com.uruklabs.newsspace.core.State
-import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
 import com.uruklabs.newsspace.data.SpaceFlightNewsCategory.*
 import com.uruklabs.newsspace.databinding.HomeFragmentBinding
 import com.uruklabs.newsspace.presentation.adapter.PostListAdapter
@@ -29,18 +29,21 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        return binding.root
+    }
 
-        initBinding()
-        initSnackbar()
-        initRecyclerView()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initMainMenu()
         initSearch()
-
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initBinding()
+        initSnackbar()
+        initRecyclerView()
+
         initQuerySearchHintObserver()
     }
 
@@ -111,7 +114,10 @@ class HomeFragment : Fragment() {
 
     private fun initRecyclerView() {
 
-        val adapter = PostListAdapter()
+        val adapter = PostListAdapter {
+
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToReadPostFragment(it))
+        }
         binding.homeRv.adapter = adapter
 
         viewModel.listPost.observe(viewLifecycleOwner) { state ->
