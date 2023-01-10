@@ -63,5 +63,7 @@
 <h4> Futuras implementações </h4>
 
 - [ ] Salvar em favoritos
+- [ ] Layout da SplashScreen
 - [ ] Testes de Interface usando Espresso
 - [ ] Correção de testes
+
