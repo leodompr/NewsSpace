@@ -66,8 +66,6 @@ class ReadPostFragment : Fragment() {
     private fun openWeb(url: String) {
         val bottomNotification = BottomSheetWebView(
             url,
-            requireActivity().supportFragmentManager,
-            true,
         )
         bottomNotification.show(activity?.supportFragmentManager!!, "SHOW")
     }

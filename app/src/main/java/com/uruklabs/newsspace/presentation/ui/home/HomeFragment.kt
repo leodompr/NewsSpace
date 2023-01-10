@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.uruklabs.newsspace.R
 import com.uruklabs.newsspace.core.State
+import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
 import com.uruklabs.newsspace.databinding.HomeFragmentBinding
 import com.uruklabs.newsspace.presentation.adapter.PostListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -56,9 +57,10 @@ class HomeFragment : Fragment() {
         with(binding.bottomNavigationView) {
             this.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.action_get_articles -> viewModel.fethLatest(ARTICLES)
-                    R.id.action_get_blogs -> viewModel.fethLatest(BLOGS)
-                    R.id.action_get_reports -> viewModel.fethLatest(REPORTS)
+                    R.id.action_get_articles ->
+                        viewModel.fethLatest(SpaceFlightNewsCategory.ARTICLES)
+                    R.id.action_get_blogs -> viewModel.fethLatest(SpaceFlightNewsCategory.BLOGS)
+                    R.id.action_get_reports -> viewModel.fethLatest(SpaceFlightNewsCategory.REPORTS)
                 }
                 true
             }
@@ -68,9 +70,9 @@ class HomeFragment : Fragment() {
     private fun initQuerySearchHintObserver() {
         viewModel.category.observe(viewLifecycleOwner) {
             searchView.queryHint = getString(R.string.search_in_hint) + " " + when (it) {
-                ARTICLES -> getString(R.string.articles)
-                BLOGS -> getString(R.string.blogs)
-                REPORTS -> getString(R.string.reports)
+                SpaceFlightNewsCategory.ARTICLES -> getString(R.string.articles)
+                SpaceFlightNewsCategory.BLOGS -> getString(R.string.blogs)
+                SpaceFlightNewsCategory.REPORTS -> getString(R.string.reports)
             }
         }
     }

@@ -1,6 +1,10 @@
 package com.uruklabs.newsspace.presentation.ui.home
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.uruklabs.newsspace.core.Query
 import com.uruklabs.newsspace.core.RemoteException
 import com.uruklabs.newsspace.core.State
@@ -8,7 +12,6 @@ import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
 import com.uruklabs.newsspace.data.entites.model.Post
 import com.uruklabs.newsspace.domain.GetLatestPostsByTitleUseCase
 import com.uruklabs.newsspace.domain.GetLatestPostsUseCase
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -16,6 +19,7 @@ import kotlinx.coroutines.launch
 /**
  * Essa classe dá suporte à tela principal (Home).
  */
+
 class HomeViewModel(
     private val getLatestPostsUsecase: GetLatestPostsUseCase,
     private val getLatestPostsByTitleUseCase: GetLatestPostsByTitleUseCase
@@ -73,7 +77,6 @@ class HomeViewModel(
                 .onStart {
                     // Faça algo no comecço do flow
                     _listPost.postValue(State.Loading)
-                    delay(800) // efeito cosmético
                 }
                 .catch {
                     // trate uma Exc

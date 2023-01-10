@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.Nullable
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.uruklabs.newsspace.databinding.BottomSheetWebViewBinding
 
-class BottomSheetWebView(val url: String, supportFragmentManager: FragmentManager, b: Boolean,) :
+class BottomSheetWebView(val url: String) :
     BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetWebViewBinding
 

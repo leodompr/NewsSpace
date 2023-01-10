@@ -6,6 +6,8 @@ plugins {
     id "org.jlleitschuh.gradle.ktlint" version "10.2.0"
 }
 
+apply from: "../config/detekt/detekt.gradle"
+
 android {
     namespace 'com.uruklabs.newsspace'
     compileSdk 32

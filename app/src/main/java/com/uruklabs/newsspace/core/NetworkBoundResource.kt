@@ -19,7 +19,7 @@ inline fun <ResultType, RequestType> netWorkBoundResource(
         // se a api nao retorna vazio, limpa o cache local e salva os novos resultados
         saveFetchResult(fetch())
         data = query().first()
-    } catch (ex: Exception) {
+    } catch (ex: ExceptionInInitializerError) {
         val error = RemoteException("Error in connect, results view as cached")
         emit(Resouce.Error(data = data, error = error))
     }

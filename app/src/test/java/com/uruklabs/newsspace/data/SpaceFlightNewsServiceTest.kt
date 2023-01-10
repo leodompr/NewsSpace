@@ -43,7 +43,6 @@ class SpaceFlightNewsServiceTest {
     fun deve_AlcancarOEndPointArticles_AoReceberPorParametro() {
         runBlocking {
             mockWebServer.enqueue(MockResponse().setBody("[]"))
-            val result1 = service.getListPosts(SpaceFlightNewsCategory.ARTICLES.value)
             val request1 = mockWebServer.takeRequest()
             assertEquals(request1.path, "/articles")
         }
@@ -53,7 +52,6 @@ class SpaceFlightNewsServiceTest {
     fun deve_AlcancarOEndPointReports_AoReceberPorParametro() {
         runBlocking {
             mockWebServer.enqueue(MockResponse().setBody("[]"))
-            val result3 = service.getListPosts(SpaceFlightNewsCategory.REPORTS.value)
             val request3 = mockWebServer.takeRequest()
             assertEquals(request3.path, "/reports")
         }
@@ -63,7 +61,6 @@ class SpaceFlightNewsServiceTest {
     fun deve_AlcancarOEndPointBlogs_AoReceberPorParametro() {
         runBlocking {
             mockWebServer.enqueue(MockResponse().setBody("[]"))
-            val result2 = service.getListPosts(SpaceFlightNewsCategory.BLOGS.value)
             val request2 = mockWebServer.takeRequest()
             assertEquals(request2.path, "/blogs")
         }

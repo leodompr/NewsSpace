@@ -16,6 +16,8 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
+const val RADIUS_IMAGE = 30f
+const val STROKE_IMAGE = 5f
 /**
  *  Esse arquivo mantém BindingAdapters para os objetos do
  *  tipo Post associados aos itens da RecyclerView
@@ -46,8 +48,8 @@ fun ImageView.setImage(post: Post?) {
          * Exibe uma progressBar circular enquanto carrega a imagem
          */
         val circularProgressDrawable = CircularProgressDrawable(context)
-        circularProgressDrawable.strokeWidth = 5f
-        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.strokeWidth = STROKE_IMAGE
+        circularProgressDrawable.centerRadius = RADIUS_IMAGE
         circularProgressDrawable.start()
 
         Glide.with(this).load(post.imageUrl)
