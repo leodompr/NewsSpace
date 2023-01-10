@@ -36,8 +36,6 @@
 
 
 
-
-
 <h3> Desenvolvimento </h3>
 
 - CleanArquiteture
@@ -51,6 +49,9 @@
 - DataBinding.
 - Jetpack Navigation Component.
 - SafeArgs.
+- Kitlint para análise estática de código.
+- Detekt para aprimorar a qualidade do código através de análises estáticas.
+
 
 <h3> Testes </h3>
 
@@ -58,3 +59,9 @@
 - Testes unitários JUnit
 - Testes usando o KoinTest para injetar dependências
 - Testes do Database no contexto do Android
+
+<h4> Futuras implementações </h4>
+
+- [ ] Salvar em favoritos
+- [ ] Testes de Interface usando Espresso
+- [ ] Correção de testes
