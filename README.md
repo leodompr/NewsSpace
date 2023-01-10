@@ -28,7 +28,7 @@
 
 <h3> Funcionalidades </h3>
 
-- [x] Listagem artigos, blogs e diários de bordo recentes
+- [x] Listagem artigos, blogs e relatórios recentes
 - [x] Pesquisa por termo desejado
 - [x] Navegação entre os tipos de conteúdo
 - [x] Possibilidade de abrir artigo completo em WebView
@@ -41,7 +41,8 @@
 - Clean Architecture.
 - Arquitetura MVVM.
 - Injeção de dependência usando Koin
-- Retrofit.
+- Retrofit para consumo da api Spaceflight News
+- Moshi para map do Json
 - Corountines e Kotlin Flow.
 - Room.
 - Glide para carregamento de imagens.
@@ -57,6 +58,7 @@
 
 - Abordagem TDD
 - Testes unitários JUnit
+- MockWebServer para testes de requisições
 - Testes usando o KoinTest para injetar dependências
 - Testes do Database no contexto do Android
 
