@@ -8,4 +8,7 @@
     <string name="latest_reports">Latest Reports</string>
     <string name="search">Search</string>
     <string name="search_in_hint">Search in </string>
+    <string name="see_all">See all</string>
+    <string name="close">Close</string>
+    <string name="news_space">News Space</string>
 </resources>

@@ -60,8 +60,21 @@ class ReadPostFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        binding.lvOpenSee.setOnClickListener {
+            openWeb(args.post.url)
+        }
 
 
     }
+
+   private fun openWeb(url: String) {
+        val bottomNotification = BottomSheetWebView(
+            url,
+            requireActivity().supportFragmentManager,
+            true,
+        )
+        bottomNotification.show(activity?.supportFragmentManager!!, "SHOW")
+    }
+
 
 }

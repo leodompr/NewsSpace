@@ -32,13 +32,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" >
 
-                <TextView
-                    android:id="@+id/tv_title"
-                    textViewText="@{viewModel.category}"
+
+                <ImageView
+                    android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    app:srcCompat="@drawable/logo_bar"
+                    tools:layout_editor_absoluteX="7dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:text="@string/news_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
                     android:textColor="@color/off_white"
+                    android:fontFamily="@font/montserrat_alternates_bold"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="6dp"
@@ -50,10 +60,12 @@
             </com.google.android.material.appbar.MaterialToolbar>
 
 
+
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="68dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:menu="@menu/main_menu"
                 android:elevation="50dp"
@@ -63,6 +75,8 @@
                 app:itemIconTint="@drawable/bottom_item_background_color"
                 app:itemTextColor="@drawable/bottom_item_background_color"
                 app:labelVisibilityMode="labeled"
+                app:itemPaddingTop="14dp"
+                app:itemPaddingBottom="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -73,7 +87,7 @@
                 android:fontFamily="@font/noto_serif_bold"
                 android:text="@{viewModel.helloText}"
                 android:textColor="?attr/colorOnPrimary"
-                android:visibility="@{viewModel.helloText.empty ? View.GONE : View.VISIBLE}"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,8 +116,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
                 tools:visibility="visible" />
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
