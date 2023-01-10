@@ -13,7 +13,7 @@ data class Post(
     val summary: String,
     val publishedAt: String,
     val updatedAt: String?,
-    var launches: Array<Launch> = emptyArray()
+    var launches: Array<Launch> = emptyArray(),
 ) : java.io.Serializable {
     /**
      * A função hasLaunch() é um método de conveniência para

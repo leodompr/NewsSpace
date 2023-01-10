@@ -14,6 +14,6 @@ interface PostRepository {
 
     suspend fun getlistPostsByTitle(category: String, query : String?): Flow<Resouce<List<Post>>>
 
-    suspend fun getPostByID(category: String, id : Int): Flow<Resouce<Post>>
+
 
 }

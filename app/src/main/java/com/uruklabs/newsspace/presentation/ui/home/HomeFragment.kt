@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 import com.uruklabs.newsspace.R
 import com.uruklabs.newsspace.core.State
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initMainMenu()
+
         initSearch()
     }
 
@@ -43,32 +45,34 @@ class HomeFragment : Fragment() {
         initBinding()
         initSnackbar()
         initRecyclerView()
-
+        initBottomBar()
         initQuerySearchHintObserver()
     }
 
     private fun initMainMenu() {
         with(binding.homeToolbar) {
-            this.inflateMenu(R.menu.main_menu)
-            menu.findItem(R.id.action_get_articles).setOnMenuItemClickListener {
-                viewModel.fethLatest(ARTICLES)
-                true
-            }
-            menu.findItem(R.id.action_get_blogs).setOnMenuItemClickListener {
-                viewModel.fethLatest(BLOGS)
-                true
-            }
-            menu.findItem(R.id.action_get_reports).setOnMenuItemClickListener {
-                viewModel.fethLatest(REPORTS)
-                true
-            }
+            this.inflateMenu(R.menu.search_menu)
         }
     }
 
+    private fun initBottomBar(){
+        with(binding.bottomNavigationView) {
+           this.setOnItemSelectedListener {
+                when(it.itemId){
+                     R.id.action_get_articles -> viewModel.fethLatest(ARTICLES)
+                     R.id.action_get_blogs -> viewModel.fethLatest(BLOGS)
+                     R.id.action_get_reports -> viewModel.fethLatest(REPORTS)
+                }
+                true
+           }
+        }
+
+
+    }
 
     private fun initQuerySearchHintObserver() {
         viewModel.category.observe(viewLifecycleOwner) {
-            searchView.queryHint = getString(R.string.search_in_hint) + when (it) {
+            searchView.queryHint = getString(R.string.search_in_hint) + " " + when (it) {
                 ARTICLES -> getString(R.string.articles)
                 BLOGS -> getString(R.string.blogs)
                 REPORTS -> getString(R.string.reports)

@@ -5,23 +5,20 @@
     <item
         android:id="@+id/action_get_articles"
         android:title="@string/articles"
-        app:showAsAction="never" />
+        android:icon="@drawable/news_indicador"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_get_blogs"
         android:title="@string/blogs"
-        app:showAsAction="never" />
+        android:icon="@drawable/blogs_indicador"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_get_reports"
         android:title="@string/reports"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/search"
-        android:iconTint="@color/off_white"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="collapseActionView|always" />
+        android:icon="@drawable/reports_indicador"
+        app:showAsAction="ifRoom" />
+
 
 </menu>

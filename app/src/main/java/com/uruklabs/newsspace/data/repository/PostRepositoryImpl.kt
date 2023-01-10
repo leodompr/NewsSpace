@@ -46,9 +46,8 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
             dao.saveAll(it.toDB())
         })
 
-    override suspend fun getPostByID(category: String, id: Int): Flow<Resouce<Post>> = flow {
-        Resouce.Success(data = dao.getPost(id).collect { it.toModel() })
-    }
+
+
 
 }
 

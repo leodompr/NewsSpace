@@ -49,6 +49,23 @@
 
             </com.google.android.material.appbar.MaterialToolbar>
 
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:menu="@menu/main_menu"
+                android:elevation="50dp"
+                app:elevation="50dp"
+                android:background="@drawable/rounder_bottom_nav_background"
+                app:itemIconSize="22dp"
+                app:itemIconTint="@drawable/bottom_item_background_color"
+                app:itemTextColor="@drawable/bottom_item_background_color"
+                app:labelVisibilityMode="labeled"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
                 android:id="@+id/home_hello_text"
                 android:layout_width="wrap_content"
@@ -68,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +100,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_hello_text"
+                app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
                 tools:visibility="visible" />
 
 
