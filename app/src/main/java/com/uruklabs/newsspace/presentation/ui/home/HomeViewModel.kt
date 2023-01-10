@@ -10,7 +10,6 @@ import com.uruklabs.newsspace.domain.GetLatestPostsByTitleUseCase
 import com.uruklabs.newsspace.domain.GetLatestPostsUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
@@ -25,7 +24,6 @@ class HomeViewModel(
     private val _progressBarVisible = MutableLiveData(false)
     val progressBarVisible: LiveData<Boolean>
         get() = _progressBarVisible
-
 
     fun showProgressBar() {
         _progressBarVisible.value = true
@@ -53,7 +51,6 @@ class HomeViewModel(
     val category: LiveData<SpaceFlightNewsCategory>
         get() = _category
 
-
     private val _listPost = MutableLiveData<State<List<Post>>>()
     val listPost: LiveData<State<List<Post>>>
         get() = _listPost
@@ -66,7 +63,6 @@ class HomeViewModel(
         fetchPosts(Query(type = category.value))
     }
 
-
     /**
      * Esse método coleta o fluxo do repositorio e atribui
      * o seu valor ao campo _listPost
@@ -75,12 +71,12 @@ class HomeViewModel(
         viewModelScope.launch {
             getLatestPostsUsecase(query)
                 .onStart {
-                    //Faça algo no comecço do flow
+                    // Faça algo no comecço do flow
                     _listPost.postValue(State.Loading)
-                    delay(800) //efeito cosmético
+                    delay(800) // efeito cosmético
                 }
                 .catch {
-                    //trate uma Exc
+                    // trate uma Exc
                     val exception = RemoteException("Unable to connect to SpaceFlightNews API")
                     _listPost.postValue(State.Error(exception))
                     _snackBar.value = exception.message
@@ -98,16 +94,15 @@ class HomeViewModel(
         }
     }
 
-
     private fun fetchPostsByTitle(query: Query) {
         viewModelScope.launch {
             getLatestPostsByTitleUseCase(query)
                 .onStart {
-                    //Faça algo no comecço do flow
+                    // Faça algo no comecço do flow
                     _listPost.postValue(State.Loading)
                 }
                 .catch {
-                    //trate uma Exc
+                    // trate uma Exc
                     val exception = RemoteException("Unable to connect to SpaceFlightNews API")
                     _listPost.postValue(State.Error(exception))
                     _snackBar.value = exception.message
@@ -142,5 +137,4 @@ class HomeViewModel(
             }
         }
     }
-
 }

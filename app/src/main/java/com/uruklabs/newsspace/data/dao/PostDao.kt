@@ -1,11 +1,9 @@
 package com.uruklabs.newsspace.data.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.uruklabs.newsspace.core.Resouce
 import com.uruklabs.newsspace.data.entites.database.PostDB
 import kotlinx.coroutines.flow.Flow
 
@@ -23,5 +21,4 @@ interface PostDao {
 
     @Query("SELECT * FROM posts WHERE id = :id")
     fun getPost(id: Int): Flow<PostDB>
-
 }

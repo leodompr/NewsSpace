@@ -8,5 +8,4 @@ sealed class Resouce<T>(
     data class Success<T>(override val data: T?) : Resouce<T>(data, null)
     data class Error<T>(override val data: T?, override val error: Throwable) :
         Resouce<T>(null, error)
-
 }

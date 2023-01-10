@@ -12,5 +12,4 @@ class GetLatestPostsByTitleUseCase(private val repository: PostRepository) :
 
     override suspend fun execute(param: Query): Flow<Resouce<List<Post>>> =
         repository.getlistPostsByTitle(query = param.query, category = param.type)
-
 }

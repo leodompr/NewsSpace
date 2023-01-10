@@ -14,8 +14,6 @@ data class LaunchDB(
         id = id,
         provider = provider
     )
-
-
 }
 
 fun Array<LaunchDB>.toModel(): Array<Launch> = this.map {

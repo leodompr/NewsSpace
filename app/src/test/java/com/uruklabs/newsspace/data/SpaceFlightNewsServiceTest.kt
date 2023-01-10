@@ -3,6 +3,7 @@ package com.uruklabs.newsspace.data
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
+import kotlin.test.assertEquals
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -13,8 +14,6 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import kotlin.test.assertEquals
-
 
 @RunWith(JUnit4::class)
 class SpaceFlightNewsServiceTest {
@@ -22,7 +21,7 @@ class SpaceFlightNewsServiceTest {
     lateinit var mockWebServer: MockWebServer
     lateinit var service: SpaceFightNewsServices
 
-    //Antes de cada teste
+    // Antes de cada teste
     @Before
     fun createService() {
         val factory = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -34,12 +33,11 @@ class SpaceFlightNewsServiceTest {
             .create(SpaceFightNewsServices::class.java)
     }
 
-    //Após cada teste
+    // Após cada teste
     @After
     fun stopService() {
         mockWebServer.shutdown()
     }
-
 
     @Test
     fun deve_AlcancarOEndPointArticles_AoReceberPorParametro() {
@@ -71,7 +69,6 @@ class SpaceFlightNewsServiceTest {
         }
     }
 
-
     @Test
     fun deve_AlcancarOEndPointCorreto_AoReceberQueryComOption() {
         runBlocking {
@@ -90,8 +87,5 @@ class SpaceFlightNewsServiceTest {
             val request = mockWebServer.takeRequest()
             assertEquals(request.path, "/articles")
         }
-
     }
-
-
 }

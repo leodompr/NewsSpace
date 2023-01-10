@@ -6,6 +6,9 @@ import com.uruklabs.newsspace.core.Query
 import com.uruklabs.newsspace.core.Resouce
 import com.uruklabs.newsspace.data.SpaceFlightNewsCategory
 import com.uruklabs.newsspace.data.entites.model.Post
+import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -15,11 +18,6 @@ import org.junit.Test
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
-import kotlin.test.assertFalse
-
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
-
 
 class GetLatestPostsUsecaseTest : KoinTest {
 
@@ -27,19 +25,18 @@ class GetLatestPostsUsecaseTest : KoinTest {
 
     companion object {
 
-        //Antes de rodas o ambiente de testes iniciamos a aplicação do Koin
+        // Antes de rodas o ambiente de testes iniciamos a aplicação do Koin
         @BeforeClass
         @JvmStatic
         fun setup() {
             configureTestAppComponent()
         }
 
-        //Após, desligar a aplicação do Koin
+        // Após, desligar a aplicação do Koin
         @AfterClass
         fun tearDown() {
             stopKoin()
         }
-
     }
 
     @Test
@@ -68,6 +65,4 @@ class GetLatestPostsUsecaseTest : KoinTest {
             result.first().data?.isEmpty()?.let { assertFalse(it) }
         }
     }
-
-
 }

@@ -16,13 +16,11 @@ data class LaunchDTO(
         id = id,
         provider = provider
     )
-
-
 }
-fun Array<LaunchDTO>.toModel() : Array<Launch> = this.map {
+fun Array<LaunchDTO>.toModel(): Array<Launch> = this.map {
     it.toModel()
 }.toTypedArray()
 
-fun Array<LaunchDTO>.toDB() : Array<LaunchDB> = this.map {
+fun Array<LaunchDTO>.toDB(): Array<LaunchDB> = this.map {
     it.toDB()
 }.toTypedArray()

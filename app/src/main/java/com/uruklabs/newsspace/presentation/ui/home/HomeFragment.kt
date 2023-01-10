@@ -7,18 +7,14 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 import com.uruklabs.newsspace.R
 import com.uruklabs.newsspace.core.State
-import com.uruklabs.newsspace.data.SpaceFlightNewsCategory.*
 import com.uruklabs.newsspace.databinding.HomeFragmentBinding
 import com.uruklabs.newsspace.presentation.adapter.PostListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class HomeFragment : Fragment() {
-
 
     private val viewModel: HomeViewModel by viewModel()
     private val binding: HomeFragmentBinding by lazy {
@@ -27,7 +23,8 @@ class HomeFragment : Fragment() {
     private lateinit var searchView: SearchView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return binding.root
@@ -55,19 +52,17 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initBottomBar(){
+    private fun initBottomBar() {
         with(binding.bottomNavigationView) {
-           this.setOnItemSelectedListener {
-                when(it.itemId){
-                     R.id.action_get_articles -> viewModel.fethLatest(ARTICLES)
-                     R.id.action_get_blogs -> viewModel.fethLatest(BLOGS)
-                     R.id.action_get_reports -> viewModel.fethLatest(REPORTS)
+            this.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.action_get_articles -> viewModel.fethLatest(ARTICLES)
+                    R.id.action_get_blogs -> viewModel.fethLatest(BLOGS)
+                    R.id.action_get_reports -> viewModel.fethLatest(REPORTS)
                 }
                 true
-           }
+            }
         }
-
-
     }
 
     private fun initQuerySearchHintObserver() {
@@ -78,8 +73,6 @@ class HomeFragment : Fragment() {
                 REPORTS -> getString(R.string.reports)
             }
         }
-
-
     }
 
     private fun initSearch() {
@@ -102,7 +95,6 @@ class HomeFragment : Fragment() {
                     }
                     return true
                 }
-
             })
         }
     }
@@ -120,7 +112,8 @@ class HomeFragment : Fragment() {
 
         val adapter = PostListAdapter {
 
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToReadPostFragment(it))
+            findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToReadPostFragment(it))
         }
         binding.homeRv.adapter = adapter
 
@@ -137,10 +130,7 @@ class HomeFragment : Fragment() {
                     adapter.submitList(state.result)
                 }
             }
-
         }
-
-
     }
 
     /**
@@ -154,6 +144,4 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
     }
-
-
 }

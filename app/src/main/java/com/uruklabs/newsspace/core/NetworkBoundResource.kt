@@ -11,20 +11,18 @@ inline fun <ResultType, RequestType> netWorkBoundResource(
     crossinline saveFetchResult: suspend (RequestType) -> Unit
 ): Flow<Resouce<ResultType>> = flow {
 
-    //consulta o banco de dados local
+    // consulta o banco de dados local
     var data = query().first()
 
-    //consulta a api
+    // consulta a api
     try {
-        //se a api nao retorna vazio, limpa o cache local e salva os novos resultados
+        // se a api nao retorna vazio, limpa o cache local e salva os novos resultados
         saveFetchResult(fetch())
         data = query().first()
-
     } catch (ex: Exception) {
         val error = RemoteException("Error in connect, results view as cached")
         emit(Resouce.Error(data = data, error = error))
     }
 
     emit(Resouce.Success(data = data))
-
 }

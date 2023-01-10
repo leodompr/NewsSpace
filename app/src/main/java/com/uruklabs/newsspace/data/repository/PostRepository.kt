@@ -12,8 +12,5 @@ interface PostRepository {
 
     suspend fun getlistPosts(category: String): Flow<Resouce<List<Post>>>
 
-    suspend fun getlistPostsByTitle(category: String, query : String?): Flow<Resouce<List<Post>>>
-
-
-
+    suspend fun getlistPostsByTitle(category: String, query: String?): Flow<Resouce<List<Post>>>
 }

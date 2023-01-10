@@ -14,7 +14,8 @@ import com.uruklabs.newsspace.databinding.ItemPostBinding
  * Como é um ListAdapter eu também não preciso manter um campo list
  * na classe Adapter.
  */
-class PostListAdapter(private val onClik : (Post) -> Unit) : ListAdapter<Post, PostListAdapter.PostViewHolder>(PostDiffCallback()){
+class PostListAdapter(private val onClik: (Post) -> Unit) :
+    ListAdapter<Post, PostListAdapter.PostViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder.from(parent)
@@ -36,11 +37,11 @@ class PostListAdapter(private val onClik : (Post) -> Unit) : ListAdapter<Post, P
              * Esse método infla o layout e retorna o ViewHolder. É uma boa prática
              * que reduz o acoplamento do código do adapter.
              */
-            fun from(parent: ViewGroup) : PostViewHolder {
+            fun from(parent: ViewGroup): PostViewHolder {
                 val binding: ItemPostBinding = ItemPostBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
-                false
+                    false
                 )
                 return PostViewHolder(binding)
             }
@@ -53,20 +54,19 @@ class PostListAdapter(private val onClik : (Post) -> Unit) : ListAdapter<Post, P
          * no item.
          */
 
-        fun bind(item: Post, onClik:(Post) -> Unit) {
+        fun bind(item: Post, onClik: (Post) -> Unit) {
             binding.post = item
             itemView.setOnClickListener {
                 onClik(item)
             }
         }
-
     }
 
     /**
      * Essa classe mantém os métodos obrigatórios para o DiffUtil
      * e é praticamente boilerplate.
      */
-    private class PostDiffCallback : DiffUtil.ItemCallback<Post>(){
+    private class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
             return oldItem.id == newItem.id
         }
@@ -74,7 +74,5 @@ class PostListAdapter(private val onClik : (Post) -> Unit) : ListAdapter<Post, P
         override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
             return oldItem == newItem
         }
-
     }
-
 }

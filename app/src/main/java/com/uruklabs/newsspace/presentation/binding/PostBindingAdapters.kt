@@ -7,10 +7,10 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.uruklabs.newsspace.data.entites.model.Post
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.uruklabs.newsspace.R
+import com.uruklabs.newsspace.data.entites.model.Post
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZoneOffset
@@ -34,7 +34,6 @@ fun TextView.setPostSummary(post: Post?) {
     }
 }
 
-
 /**
  * Esse adapter usa a biblioteca Glide para carregar uma imagem
  * à partir da URL e aplicá-la à ImageView
@@ -53,7 +52,6 @@ fun ImageView.setImage(post: Post?) {
 
         Glide.with(this).load(post.imageUrl)
             .placeholder(circularProgressDrawable).into(this)
-
     }
 }
 
@@ -75,8 +73,6 @@ fun Chip.setHasLaunch(post: Post?) {
         this.text = resources.getQuantityString(R.plurals.numberOfLaunchEvents, count, count)
     }
 }
-
-
 
 /**
  * Esse adapter converte a data em formato String usando a classe Instant

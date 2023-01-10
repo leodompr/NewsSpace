@@ -1,6 +1,5 @@
 package com.uruklabs.newsspace.data.services
 
-import com.uruklabs.newsspace.data.entites.model.Post
 import com.uruklabs.newsspace.data.entites.network.PostDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,9 +18,4 @@ interface SpaceFightNewsServices {
         @Path("type") type: String,
         @Query("title_contains") query: String?
     ): List<PostDTO>
-
-
-
-
-
 }

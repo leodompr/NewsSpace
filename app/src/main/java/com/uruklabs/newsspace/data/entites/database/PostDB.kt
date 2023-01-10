@@ -6,7 +6,6 @@ import androidx.room.TypeConverter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.uruklabs.newsspace.data.entites.model.Post
-import com.uruklabs.newsspace.data.entites.network.PostDTO
 import com.uruklabs.newsspace.data.entites.network.toModel
 
 @Entity(tableName = "posts")
@@ -40,8 +39,8 @@ fun List<PostDB>.toModel(): List<Post> = this.map {
 class PostDBConverters {
 
     /**
-    Conversor de Launch para String para salvar no Room e
-    depois converter de volta essa string Json para a DataClass
+     Conversor de Launch para String para salvar no Room e
+     depois converter de volta essa string Json para a DataClass
      **/
 
     @TypeConverter
@@ -51,12 +50,10 @@ class PostDBConverters {
         return jsonAdapter.toJson(array)
     }
 
-
     @TypeConverter
     fun fromString(string: String): Array<LaunchDB>? {
         val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
         val jsonAdapter = moshi.adapter(Array<LaunchDB>::class.java)
         return jsonAdapter.fromJson(string)
     }
-
 }

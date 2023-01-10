@@ -1,6 +1,5 @@
 package com.uruklabs.newsspace.data.repository
 
-import androidx.lifecycle.asLiveData
 import com.uruklabs.newsspace.core.Resouce
 import com.uruklabs.newsspace.core.netWorkBoundResource
 import com.uruklabs.newsspace.data.dao.PostDao
@@ -9,10 +8,7 @@ import com.uruklabs.newsspace.data.entites.model.Post
 import com.uruklabs.newsspace.data.entites.network.toDB
 import com.uruklabs.newsspace.data.services.SpaceFightNewsServices
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-
 
 class PostRepositoryImpl(private val service: SpaceFightNewsServices, private val dao: PostDao) :
     PostRepository {
@@ -32,8 +28,8 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
             saveFetchResult = {
                 dao.clearDB()
                 dao.saveAll(it.toDB())
-            })
-
+            }
+        )
 
     override suspend fun getlistPostsByTitle(
         category: String,
@@ -44,11 +40,6 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
         saveFetchResult = {
             dao.clearDB()
             dao.saveAll(it.toDB())
-        })
-
-
-
-
+        }
+    )
 }
-
-

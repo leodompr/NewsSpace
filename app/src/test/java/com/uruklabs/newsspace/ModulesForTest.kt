@@ -17,7 +17,6 @@ fun configureDomainModuleForTest() = module {
 
     factory<GetLatestPostsUseCase> { GetLatestPostsUseCase(get()) }
     factory<GetLatestPostsByTitleUseCase> { GetLatestPostsByTitleUseCase(get()) }
-
 }
 
 fun configureDataModuleForTest(baseUrl: String) = module {
@@ -33,5 +32,4 @@ fun configureDataModuleForTest(baseUrl: String) = module {
     single<PostRepository> {
         PostRepositoryImpl(get(), mockk<PostDao>())
     }
-
 }

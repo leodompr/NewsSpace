@@ -1,7 +1,6 @@
 package com.uruklabs.newsspace.data.entites.network
 
 import com.uruklabs.newsspace.data.entites.database.PostDB
-import com.uruklabs.newsspace.data.entites.model.Launch
 import com.uruklabs.newsspace.data.entites.model.Post
 
 data class PostDTO(

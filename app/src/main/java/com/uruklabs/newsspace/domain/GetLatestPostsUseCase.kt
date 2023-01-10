@@ -9,6 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 class GetLatestPostsUseCase(private val repository: PostRepository) :
     UseCase<Query, Resouce<List<Post>>>() {
-    override suspend fun execute(param: Query): Flow<Resouce<List<Post>>> = repository.getlistPosts(param.type)
-
+    override suspend fun execute(param: Query): Flow<Resouce<List<Post>>> =
+        repository.getlistPosts(param.type)
 }

@@ -19,5 +19,4 @@ fun TextView.titleFromCategory(category: LiveData<SpaceFlightNewsCategory>?) {
         }
         this.text = context.getString(stringRes)
     }
-
 }

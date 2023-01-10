@@ -15,11 +15,9 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
-
 class ReadPostFragment : Fragment() {
 
     private val args by navArgs<ReadPostFragmentArgs>()
-
 
     private val binding: FragmentReadPostBinding by lazy {
         FragmentReadPostBinding.inflate(layoutInflater)
@@ -27,11 +25,11 @@ class ReadPostFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return binding.root
@@ -63,11 +61,9 @@ class ReadPostFragment : Fragment() {
         binding.lvOpenSee.setOnClickListener {
             openWeb(args.post.url)
         }
-
-
     }
 
-   private fun openWeb(url: String) {
+    private fun openWeb(url: String) {
         val bottomNotification = BottomSheetWebView(
             url,
             requireActivity().supportFragmentManager,
@@ -75,6 +71,4 @@ class ReadPostFragment : Fragment() {
         )
         bottomNotification.show(activity?.supportFragmentManager!!, "SHOW")
     }
-
-
 }

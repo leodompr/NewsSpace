@@ -21,7 +21,7 @@ data class Post(
      */
     fun hasLaunch(): Boolean = launches.isNotEmpty()
 
-    fun getLaunchCount() : Int = launches.size
+    fun getLaunchCount(): Int = launches.size
 
     /**
      * Sobrescrevi os métodos equals() e hashCode() para melhorar o
@@ -44,5 +44,4 @@ data class Post(
         result = 31 * result + title.hashCode()
         return result
     }
-
 }

@@ -18,5 +18,4 @@ object DomainModule {
             factory { GetLatestPostsByTitleUseCase(get()) }
         }
     }
-
 }

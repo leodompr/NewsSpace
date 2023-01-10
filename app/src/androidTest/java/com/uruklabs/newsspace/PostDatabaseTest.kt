@@ -6,8 +6,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.uruklabs.newsspace.data.dao.PostDao
 import com.uruklabs.newsspace.data.dao.databse.PostDatabase
-import com.uruklabs.newsspace.data.entites.database.LaunchDB
 import com.uruklabs.newsspace.data.entites.database.PostDB
+import java.io.IOException
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -15,19 +15,16 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 class PostDatabaseTest : DBTeste() {
 
-
     private lateinit var dao: PostDao
     private lateinit var postDatabase: PostDatabase
 
-
     @Before
     fun createDB() {
-        //instanciar o PostDataBase em memória
+        // instanciar o PostDataBase em memória
         val context = ApplicationProvider.getApplicationContext<Context>()
         postDatabase = Room.inMemoryDatabaseBuilder(
             context,
@@ -37,7 +34,6 @@ class PostDatabaseTest : DBTeste() {
         dao = postDatabase.dao
     }
 
-
     @After
     @Throws(IOException::class)
     fun closeDB() {
@@ -46,22 +42,21 @@ class PostDatabaseTest : DBTeste() {
 
     @Test
     fun deve_GravarPostsNoBancoDeDadosLocal_AoReceberListaDePosts() {
-        //verificando se lista não esta vazia
+        // verificando se lista não esta vazia
         lateinit var result: List<PostDB>
         runBlocking {
             result = dao.getListPosts().first()
         }
         assertTrue(result.isEmpty())
 
-        //salvando os dados no Database
+        // salvando os dados no Database
         runBlocking {
             dao.saveAll(listDbPosts)
             result = dao.getListPosts().first()
         }
 
-        //verifando se dao não esta vazio
+        // verifando se dao não esta vazio
         assertTrue(result.isNotEmpty())
-
     }
 
     @Test
@@ -74,7 +69,6 @@ class PostDatabaseTest : DBTeste() {
         assertTrue(result.title == listDbPosts.first().title)
     }
 
-
     @Test
     fun deve_LimparBancoDeDadosLocal_AoChamarFuncaoCorrespondente() {
         lateinit var result: List<PostDB>
@@ -85,5 +79,4 @@ class PostDatabaseTest : DBTeste() {
         }
         assertTrue(result.isEmpty())
     }
-
 }

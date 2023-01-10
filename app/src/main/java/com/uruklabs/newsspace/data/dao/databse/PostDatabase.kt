@@ -35,9 +35,6 @@ abstract class PostDatabase : RoomDatabase() {
                 }
                 return instance
             }
-
         }
     }
-
-
 }
