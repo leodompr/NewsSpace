@@ -38,7 +38,7 @@
 
 <h3> Desenvolvimento </h3>
 
-- CleanArquiteture
+- Clean Architecture.
 - Arquitetura MVVM.
 - Injeção de dependência usando Koin
 - Retrofit.
