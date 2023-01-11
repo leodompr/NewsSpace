@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 abstract class UseCase<Param, Source> {
 
-    abstract suspend fun execute(param: Param): Flow<Source>
+    abstract fun execute(param: Param): Flow<Source>
 
     // Por meio do "operator" posso chamar uma função usando o nome do meu objeto
     suspend operator fun invoke(param: Param) = execute(param)
@@ -12,7 +12,7 @@ abstract class UseCase<Param, Source> {
     abstract class NoParam<Source> : UseCase<Nothing, Source>() {
         abstract suspend fun execute(): Flow<Source>
 
-        final override suspend fun execute(param: Nothing): Flow<Source> {
+        final override fun execute(param: Nothing): Flow<Source> {
             throw UnsupportedOperationException()
         }
 

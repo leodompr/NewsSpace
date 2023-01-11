@@ -21,7 +21,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
         }
     }
 
-    override suspend fun getlistPosts(category: String): Flow<Resouce<List<Post>>> =
+    override fun getlistPosts(category: String): Flow<Resouce<List<Post>>> =
         netWorkBoundResource(
             query = readDatabase,
             fetch = { service.getListPosts(category) },
@@ -31,7 +31,7 @@ class PostRepositoryImpl(private val service: SpaceFightNewsServices, private va
             }
         )
 
-    override suspend fun getlistPostsByTitle(
+    override fun getlistPostsByTitle(
         category: String,
         query: String?
     ): Flow<Resouce<List<Post>>> = netWorkBoundResource(
