@@ -59,7 +59,7 @@
 - Abordagem TDD
 - Testes unitários JUnit
 - MockWebServer para testes de requisições
-- Testes usando o KoinTest para injetar dependências
+- Testes usando o Mockk
 - Testes do Database no contexto do Android
 
 <h4> Futuras implementações </h4>
