@@ -15,4 +15,7 @@
         <item name="android:textColorHint">@color/off_white</item>
         <item name="android:editTextColor">@color/off_white</item>
     </style>
+
+
+
 </resources>
