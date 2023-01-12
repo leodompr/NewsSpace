@@ -129,10 +129,10 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/lv_open_see"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginBottom="46dp"
                 android:gravity="center"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -143,9 +143,8 @@
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-4dp"
-                    android:rotation="91"
-                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:src="@drawable/eye_ic"
+                    android:padding="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/textView"
                     app:layout_constraintEnd_toEndOf="@+id/textView"
                     app:layout_constraintStart_toStartOf="@+id/textView" />
@@ -156,6 +155,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_alternates_bold"
                     android:text="@string/see_all"
+                    android:padding="8dp"
                     android:textColor="@color/off_white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

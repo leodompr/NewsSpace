@@ -16,6 +16,7 @@
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
         android:paddingTop="8dp"
+        android:elevation="50dp"
         android:paddingBottom="6dp"
         android:layout_height="wrap_content">
 
@@ -23,7 +24,7 @@
             android:id="@+id/item_card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:elevation="3dp"
+            android:elevation="20dp"
             app:cardBackgroundColor="@color/blue_dark"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +34,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:elevation="20dp"
+
                 android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
@@ -87,8 +90,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
                     app:chipBackgroundColor="@color/red_bg"
                     app:chipCornerRadius="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/item_title_tv"
                     app:layout_constraintTop_toBottomOf="@id/item_summary_tv" />
 
