@@ -13,18 +13,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="8dp"
-        android:elevation="50dp"
-        android:paddingBottom="6dp"
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/item_card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:elevation="20dp"
+            android:elevation="30dp"
+            app:cardUseCompatPadding="true"
             app:cardBackgroundColor="@color/blue_dark"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:elevation="20dp"
-
                 android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
@@ -115,7 +114,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
