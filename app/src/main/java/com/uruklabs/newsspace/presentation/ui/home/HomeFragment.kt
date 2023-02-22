@@ -121,16 +121,10 @@ class HomeFragment : Fragment() {
 
         viewModel.listPost.observe(viewLifecycleOwner) { state ->
             when (state) {
-                State.Loading -> {
-                    viewModel.showProgressBar()
-                }
-                is State.Error -> {
-                    viewModel.hideProgressBar()
-                }
                 is State.Success -> {
-                    viewModel.hideProgressBar()
                     adapter.submitList(state.result)
                 }
+                else -> {}
             }
         }
     }

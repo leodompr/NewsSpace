@@ -29,11 +29,11 @@ class HomeViewModel(
     val progressBarVisible: LiveData<Boolean>
         get() = _progressBarVisible
 
-    fun showProgressBar() {
+    private fun showProgressBar() {
         _progressBarVisible.value = true
     }
 
-    fun hideProgressBar() {
+    private fun hideProgressBar() {
         _progressBarVisible.value = false
     }
 
@@ -64,6 +64,7 @@ class HomeViewModel(
     }
 
     fun fethLatest(category: SpaceFlightNewsCategory) {
+        showProgressBar()
         fetchPosts(Query(type = category.value))
     }
 
@@ -76,15 +77,18 @@ class HomeViewModel(
             getLatestPostsUsecase(query)
                 .onStart {
                     // Faça algo no comecço do flow
+                    showProgressBar()
                     _listPost.postValue(State.Loading)
                 }
                 .catch {
                     // trate uma Exc
+                    hideProgressBar()
                     val exception = RemoteException("Unable to connect to SpaceFlightNews API")
                     _listPost.postValue(State.Error(exception))
                     _snackBar.value = exception.message
                 }
                 .collect {
+                    hideProgressBar()
                     it.data?.let { list ->
                         _listPost.value = State.Success(list)
                     }
@@ -123,7 +127,9 @@ class HomeViewModel(
     }
 
     fun searchPostsByTile(queryStr: String) {
-        fetchPostsByTitle(Query(_category.value.toString(), query = queryStr))
+        _category.value?.let {
+            fetchPostsByTitle(Query(type = it.value, query = queryStr))
+        }
     }
 
     val helloText = Transformations.map(listPost) { state ->
