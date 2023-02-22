@@ -106,15 +106,18 @@ class HomeViewModel(
             getLatestPostsByTitleUseCase(query)
                 .onStart {
                     // Faça algo no comecço do flow
+                    showProgressBar()
                     _listPost.postValue(State.Loading)
                 }
                 .catch {
                     // trate uma Exc
+                    hideProgressBar()
                     val exception = RemoteException("Unable to connect to SpaceFlightNews API")
                     _listPost.postValue(State.Error(exception))
                     _snackBar.value = exception.message
                 }
                 .collect {
+                    hideProgressBar()
                     it.data?.let { list ->
                         _listPost.value = State.Success(list)
                     }
