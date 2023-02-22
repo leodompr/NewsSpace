@@ -32,7 +32,7 @@
 - [x] Pesquisa por termo desejado
 - [x] Navegação entre os tipos de conteúdo
 - [x] Possibilidade de abrir artigo completo em WebView
-- [x] Cache para que o app mostre as noticias salvas antes de perder a conexão.
+- [ ] Cache para que o app mostre as noticias salvas antes de perder a conexão.
 
 
 
@@ -50,7 +50,7 @@
 - DataBinding.
 - Jetpack Navigation Component.
 - SafeArgs.
-- Kitlint para análise estática de código.
+- Ktlint para análise estática de código.
 - Detekt para aprimorar a qualidade do código através de análises estáticas.
 
 
@@ -65,7 +65,6 @@
 <h4> Futuras implementações </h4>
 
 - [ ] Salvar em favoritos
-- [ ] Layout da SplashScreen
 - [ ] Testes de Interface usando Espresso
 
 
